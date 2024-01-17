@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>common</module>
+        <module>dim</module>
     </modules>
 
 
@@ -97,6 +98,13 @@
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
+            <version>${hadoop-client.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-auth</artifactId>
             <version>${hadoop-client.version}</version>
             <scope>provided</scope>
         </dependency>

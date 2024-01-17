@@ -32,8 +32,8 @@ public abstract class BaseDataStreamApp {
         env.enableCheckpointing(PropertyUtil.getIntegerValue("CHECK_POINTING_INTERVAL"));
         // 设置 checkpoint 的保存路径, 因为保存在 hdfs 上， 所以 必须保证 hadoop 是开启的 , 用户问题
         CheckpointConfig checkpointConfig = env.getCheckpointConfig();
-        checkpointConfig.setCheckpointStorage("hdfs://" + PropertyUtil.getStringValue("CHECK_POINT_STORAGE") + ":8020/ck/"+jobName);
-
+        checkpointConfig.setCheckpointStorage("hdfs://" + PropertyUtil.getStringValue("CHECK_POINT_STORAGE") + ":8020/ck/logistics/"+jobName);
+        //checkpointConfig.setCheckpointStorage("file:///e:/tmp/ck/"+jobName);
         //设置ck的超时时间
         checkpointConfig.setCheckpointTimeout(5 * 6000);
         //两次ck之间，必须间隔500ms
