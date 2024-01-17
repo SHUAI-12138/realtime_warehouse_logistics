@@ -32,7 +32,7 @@ public abstract class BaseSqlApp {
         env.enableCheckpointing(PropertyUtil.getIntegerValue("CHECK_POINTING_INTERVAL"));
 
         CheckpointConfig checkpointConfig = env.getCheckpointConfig();
-        checkpointConfig.setCheckpointStorage("hdfs://" + PropertyUtil.getStringValue("CHECK_POINT_STORAGE") + ":8020/ck/"+jobName);
+        checkpointConfig.setCheckpointStorage("hdfs://" + PropertyUtil.getStringValue("CHECK_POINT_STORAGE") + ":8020/ck/logistics/"+jobName);
 
         //设置ck的超时时间
         checkpointConfig.setCheckpointTimeout(5 * 6000);
