@@ -7,9 +7,9 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
 import static com.atguigu.realtime.constant.LogisticsConstant.*;
 
-public class TaskDetail extends BaseSqlApp {
+public class TaskDetailSql extends BaseSqlApp {
     public static void main(String[] args) {
-        new TaskDetail()
+        new TaskDetailSql()
             .start(
                 15001,
                 4,
@@ -35,19 +35,25 @@ public class TaskDetail extends BaseSqlApp {
             "  from ods_db " +
             "  where `database` = 'tms' " +
             "  and `table` = 'transport_task' " +
-            "  and `type` = 'insert' ";
+            "  and `type` = 'update' " +
+            "  and `data`['order_num'] > 0" +
+            "  and `data`['actual_end_time'] is not null";
+        //tableEnv.executeSql(transportTaskSql).print();
         // 过滤transport_task_detail的数据
         String transportDetailSql = " select " +
+            "  type, " +
             "  data['id'] id, " +
             "  data['order_id'] order_id, " +
-            "  data['transport_task_id'] transport_task_id " +
+            "  data['transport_task_id'] transport_task_id, " +
+            "  data['create_time'] create_time, " +
+            "  data['operate_time'] operate_time " +
             "  from ods_db " +
             "  where `database` = 'tms' " +
             "  and `table` = 'transport_task_detail' " +
-            "  and `type` = 'insert' ";
-        //tableEnv.createTemporaryView("tt", tableEnv.sqlQuery(transportTaskSql));
-        tableEnv.sqlQuery(transportTaskSql).execute().print();
-        //tableEnv.createTemporaryView("td", tableEnv.sqlQuery(transportDetailSql));
+            "  and `type` = 'update' ";
+        //tableEnv.executeSql(transportDetailSql).print();
+        tableEnv.createTemporaryView("tt", tableEnv.sqlQuery(transportTaskSql));
+        tableEnv.createTemporaryView("td", tableEnv.sqlQuery(transportDetailSql));
         
         // 关联
         String joinSql = " select " +
@@ -83,6 +89,7 @@ public class TaskDetail extends BaseSqlApp {
         tableEnv.executeSql(sinkSql);
         
         // 写出到kafka
-        //tableEnv.executeSql(" insert into " + TOPIC_DWD_TRANSPORT_TASK_DETAIL + joinSql);
+        tableEnv.executeSql(" insert into " + TOPIC_DWD_TRANSPORT_TASK_DETAIL + joinSql);
+        //tableEnv.executeSql("insert into " + TOPIC_DWD_TRANSPORT_TASK_DETAIL + transportTaskSql);
     }
 }
