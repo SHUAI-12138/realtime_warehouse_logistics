@@ -28,6 +28,8 @@ public class TaskDetailSql extends BaseSqlApp {
             "  data['status'] status, " +
             "  data['order_num'] order_num, " +
             "  data['truck_id'] truck_id, " +
+            "  data['start_org_id'] start_org_id, " +
+            "  data['start_org_name'] start_org_name, " +
             "  data['actual_start_time'] actual_start_time, " +
             "  data['actual_end_time'] actual_end_time, " +
             "  data['actual_distance'] actual_distance, " +
@@ -64,6 +66,8 @@ public class TaskDetailSql extends BaseSqlApp {
             "  status, " +
             "  order_num, " +
             "  truck_id, " +
+            "  start_org_id, " +
+            "  start_org_name, " +
             "  actual_start_time, " +
             "  actual_end_time, " +
             "  actual_distance, " +
@@ -81,6 +85,8 @@ public class TaskDetailSql extends BaseSqlApp {
             "  status STRING , " +
             "  order_num STRING , " +
             "  truck_id STRING , " +
+            "  start_org_id STRING , " +
+            "  start_org_name STRING , " +
             "  actual_start_time STRING , " +
             "  actual_end_time STRING , " +
             "  actual_distance STRING , " +
