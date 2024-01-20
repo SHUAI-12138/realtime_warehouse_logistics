@@ -56,7 +56,7 @@ public class DwdTransportTask extends BaseDataStreamApp {
                             String[] cols = {"actual_distance", "actual_end_time", "actual_start_time", "start_org_id", "start_org_name", "truck_id", "order_num", "end_org_id", "end_org_name"};
                             JSONObject res = new JSONObject();
                             for(String col : cols) res.put(col, data.getString(col));
-                            res.put("ts", data.getString("update_time"));
+                            res.put("ts", DateFormatUtil.dateTimeToTs(data.getString("update_time")));
                             res.put("diff_time", DateFormatUtil.dateTimeToTs(data.getString("actual_end_time")) - DateFormatUtil.dateTimeToTs(data.getString("actual_start_time")));
                             out.collect(res);
                         } catch (Exception e) {

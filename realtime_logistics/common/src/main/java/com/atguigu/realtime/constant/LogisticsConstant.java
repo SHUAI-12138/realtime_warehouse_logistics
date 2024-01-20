@@ -14,4 +14,9 @@ public interface LogisticsConstant
     String TOPIC_DWD_ORDER_STATUS_COUNT = "dwd_order_status_count";
     String TOPIC_DWD_TRADE_ORDER_ORG = "dwd_trade_order_org";
     String TOPIC_DWD_TRANSPORT_TRUCK_TASK = "dwd_transport_truck_task";
+
+    // DWS
+    String DWS_ORDER_STATUS_COUNT_VIEW_WINDOW = "logistics.dws_order_status_count_view_window";
+    String DWS_TRANSPORT_TOTAL_COUNT_VIEW_WINDOW = "logistics.dws_transport_total_count_view_window";
+    String DWS_TRADE_ORDER_CARGO_VIEW_WINDOW = "logistics.dws_trade_order_cargo_view_window";
 }

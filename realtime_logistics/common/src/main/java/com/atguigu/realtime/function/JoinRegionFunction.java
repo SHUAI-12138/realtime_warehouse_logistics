@@ -20,9 +20,11 @@ public class JoinRegionFunction extends DimOperateBaseFunction implements MapFun
         // region_id=86 此时已经获取到省份 结束循环
         while(!regionId.equals("86")) {
             String redisData = getStringFromRedis("base_region_info", regionId);
+            System.err.println(redisData);
             if(redisData == null) {
                 Table table = tableMap.get("base_region_info");
                 data = getValueFromHBase(table, regionId);
+                setStringToRedis("base_region_info", regionId, data.toJSONString());
             } else {
                 data = JSON.parseObject(redisData);
             }
