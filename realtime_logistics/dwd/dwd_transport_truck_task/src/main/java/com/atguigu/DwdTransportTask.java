@@ -3,6 +3,7 @@ package com.atguigu;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.atguigu.realtime.base.BaseDataStreamApp;
+import com.atguigu.realtime.util.DateFormatUtil;
 import com.atguigu.realtime.util.KafkaUtil;
 import com.atguigu.realtime.util.PropertyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -56,6 +57,7 @@ public class DwdTransportTask extends BaseDataStreamApp {
                             JSONObject res = new JSONObject();
                             for(String col : cols) res.put(col, data.getString(col));
                             res.put("ts", data.getString("update_time"));
+                            res.put("diff_time", DateFormatUtil.dateTimeToTs(data.getString("actual_end_time")) - DateFormatUtil.dateTimeToTs(data.getString("actual_start_time")));
                             out.collect(res);
                         } catch (Exception e) {
                             log.warn("json is illegal!");
