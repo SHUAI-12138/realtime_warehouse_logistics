@@ -45,7 +45,7 @@ public abstract class AsyncLookUpJoinFunction<T> extends DimAsyncOperateBaseFunc
                 .supplyAsync(() -> getStringFromRedisAsync(dimTable, getIdValue(input)))
                 .thenApplyAsync(data -> {
                     JSONObject res;
-                    if(data == null) {
+                    if(data == null || data.length() <= 2) {
                         AsyncTable<AdvancedScanResultConsumer> table = tableMap.get(dimTable);
                         if(table == null) {
                             String namespace = PropertyUtil.getStringValue("HBASE_NAMESPACE");
