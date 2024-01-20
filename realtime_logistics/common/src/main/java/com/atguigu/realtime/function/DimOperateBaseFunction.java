@@ -6,6 +6,7 @@ import com.atguigu.realtime.util.HBaseUtil;
 import com.atguigu.realtime.util.JDBCUtil;
 import com.atguigu.realtime.util.PropertyUtil;
 import com.atguigu.realtime.util.RedisUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.api.common.functions.AbstractRichFunction;
 import org.apache.flink.configuration.Configuration;
 import org.apache.hadoop.hbase.Cell;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@Slf4j
 public class DimOperateBaseFunction extends AbstractRichFunction {
 
     protected Jedis jedis;
@@ -96,8 +98,12 @@ public class DimOperateBaseFunction extends AbstractRichFunction {
      * @return 返回一个 Put 对象
      */
     public static Put createPut(String rowKey, String sinkFamily, JSONObject data) {
-        Put put = new Put(Bytes.toBytes(rowKey));
+        if(rowKey == null || sinkFamily == null || data == null) {
+            log.warn("DimOperateBaseFunction::createPut nullPointer warn!");
+            return null;
+        }
         byte[] family = Bytes.toBytes(sinkFamily);
+        Put put = new Put(Bytes.toBytes(rowKey));
         Set<String> fields = data.keySet();
         for(String field : fields) {
             String fieldValue = data.getString(field);

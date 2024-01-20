@@ -76,7 +76,7 @@ public class KafkaUtil {
                 //必须是EOS
                 .setDeliveryGuarantee(DeliveryGuarantee.EXACTLY_ONCE)
                 //必须设置事务id前缀
-                .setTransactionalIdPrefix("atguigu-"+topic)
+                .setTransactionalIdPrefix("logistics-"+topic)
                 .setProperty(ProducerConfig.BATCH_SIZE_CONFIG, "1000")
                 .setProperty(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG,10 * 60 * 1000+"")
                 .build();

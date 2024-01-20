@@ -31,7 +31,8 @@ public class DimAsyncOperateBaseFunction extends AbstractRichFunction {
     public void open(Configuration parameters) throws Exception {
         asyncClint = AsyncRedisUtil.getAsyncRedisClient();
         asyncRedisConnection = AsyncRedisUtil.getAsyncRedisConnection(asyncClint);
-        List<TableProcess> tableProcesses = JDBCUtil.queryBeanList(" select * from table_process where sink_type = 'DIM' ", TableProcess.class);
+        List<TableProcess> tableProcesses = JDBCUtil.
+                queryBeanList(" select * from table_process where sink_type = 'DIM' ", TableProcess.class);
         String namespace = PropertyUtil.getStringValue("HBASE_NAMESPACE");
         tableProcesses.forEach(data -> {
             tableMap.put(data.getSourceTable(), HBaseUtil.getAsyncTable(namespace, data.getSinkTable()));
