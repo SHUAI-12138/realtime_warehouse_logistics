@@ -19,6 +19,11 @@ public abstract class AsyncLookUpJoinFunction<T> extends DimAsyncOperateBaseFunc
     //关联哪个维度(业务表)
     private final String dimTable;
 
+    /**
+     * 获取 关联的字段的值
+     * @param value 关联表的 row
+     * @return row 中 关联字段的值
+     */
     public abstract String getIdValue(T value);
 
     /**

@@ -7,6 +7,7 @@ import com.atguigu.realtime.util.PropertyUtil;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.apache.hadoop.hbase.client.Delete;
+import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.util.Bytes;
 
@@ -34,7 +35,8 @@ public class HBaseSinkFunction extends DimOperateBaseFunction implements SinkFun
             table.delete(new Delete(Bytes.toBytes(rowKey)));
             jedis.del(getRedisKey(sourceTable, rowKey));
         } else {
-            table.put(createPut(rowKey, sinkFamily, data));
+            Put put = createPut(rowKey, sinkFamily, data);
+            if(put != null) table.put(put);
             setStringToRedis(sourceTable, rowKey, data.toJSONString());
         }
 

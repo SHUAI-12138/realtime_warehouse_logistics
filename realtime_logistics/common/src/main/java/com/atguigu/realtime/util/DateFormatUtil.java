@@ -49,8 +49,8 @@ public class DateFormatUtil {
      * @return 毫秒时间戳
      */
     public static long dateTimeToTs(String dateTime) {
-        return LocalDate.parse(dateTime, dateTimeFormatter)
-                .atStartOfDay(ZoneId.systemDefault())
+        return LocalDateTime.parse(dateTime, dateTimeFormatter)
+                .atZone(ZoneId.systemDefault())
                 .toInstant()
                 .toEpochMilli();
     }
@@ -58,7 +58,7 @@ public class DateFormatUtil {
     public static void main(String[] args) {
         System.out.println(parseTsToDate(1704262146000L));
         System.out.println(parseTsToDateTime(1704262146000L));
-        System.out.println(dateTimeToTs("2024-01-03 14:09:06"));
-        System.out.println(dateToTs("2024-01-03"));
+        System.out.println(dateTimeToTs("2024-01-16 22:00:49"));
+        System.out.println(dateToTs("2024-01-16"));
     }
 }
