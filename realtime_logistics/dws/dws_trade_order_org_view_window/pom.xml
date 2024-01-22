@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>dws_trade_order_total_count_view_window</artifactId>
+    <artifactId>dws_trade_order_org_view_window</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

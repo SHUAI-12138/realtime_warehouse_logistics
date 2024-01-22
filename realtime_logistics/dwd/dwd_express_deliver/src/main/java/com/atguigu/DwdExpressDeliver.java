@@ -40,8 +40,8 @@ public class DwdExpressDeliver extends BaseDataStreamApp {
         // 关联维度字段
         SingleOutputStreamOperator<JSONObject> joined = joinDim(etled);
         // 写出到 kafka
-        //writeToKafka(joined);
-        joined.print();
+        writeToKafka(joined);
+        //joined.print();
     }
 
     private SingleOutputStreamOperator<JSONObject> joinDim(SingleOutputStreamOperator<JSONObject> etled) {
@@ -57,6 +57,7 @@ public class DwdExpressDeliver extends BaseDataStreamApp {
                             @Override
                             protected void extractDimData(JSONObject value, JSONObject dimData) {
                                 value.put("region_id", dimData.getString("region_id"));
+                                value.put("org_name", dimData.getString("org_name"));
                             }
                         },
                         120,

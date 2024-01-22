@@ -12,7 +12,14 @@
     <modules>
         <module>dws_order_status_count_view_window</module>
         <module>dws_transport_total_count_view_window</module>
-        <module>dws_trade_order_total_count_view_window</module>
+        <module>dws_trade_order_cargo_view_window</module>
+        <module>dws_trade_order_city_view_window</module>
+        <module>dws_trade_order_org_view_window</module>
+        <module>dws_transport_city_org_view_window</module>
+        <module>dws_transport_truck_view_window</module>
+        <module>dws_express_pickup_view_window</module>
+        <module>dws_express_sorting_view_window</module>
+        <module>dws_express_deliver_view_window</module>
     </modules>
 
     <artifactId>dws</artifactId>
