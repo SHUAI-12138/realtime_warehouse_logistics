@@ -40,7 +40,7 @@ public class DwdExpressSorting extends BaseDataStreamApp {
         SingleOutputStreamOperator<JSONObject> joined = joinDim(etled);
         // 写入到kafka
         writeToKafka(joined);
-        // ds.print();
+        //joined.print();
     }
 
     private SingleOutputStreamOperator<JSONObject> joinDim(SingleOutputStreamOperator<JSONObject> etled) {
@@ -56,6 +56,7 @@ public class DwdExpressSorting extends BaseDataStreamApp {
                             @Override
                             protected void extractDimData(JSONObject value, JSONObject dimData) {
                                 value.put("region_id", dimData.getString("region_id"));
+                                value.put("org_name", dimData.getString("org_name"));
                             }
                         },
                         120,

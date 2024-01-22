@@ -56,6 +56,7 @@ public class DwdExpressPickup extends BaseDataStreamApp {
                             @Override
                             protected void extractDimData(JSONObject value, JSONObject dimData) {
                                 value.put("region_id", dimData.getString("region_id"));
+                                value.put("org_name", dimData.getString("org_name"));
                             }
                         },
                         120,
